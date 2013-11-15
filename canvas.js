@@ -10,7 +10,7 @@ Speroteck.signum = function(x) {
 
 Speroteck.srandom = function(n) {
     if (Speroteck.random(2) == 1) {
-        return Speroteck.random(n);
+        return -Speroteck.random(n);
     }
 
     return Speroteck.random(n);
@@ -121,11 +121,6 @@ Speroteck.Snow = (function() {
             if (this.y + this.speed < this.canvas.screenHeight) {
                 this.y += this.speed;
                 this.x += this.dir;
-                if (this.x < 0) {
-                    this.x = -random(50);
-                } else if (this.x > this.canvas.screenWidth) {
-                    this.x = this.canvas.screenWidth + random(50);
-                }
             } else {
                 this.reset();
             }

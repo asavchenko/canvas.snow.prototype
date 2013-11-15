@@ -1,29 +1,11 @@
 <html>
 <head>
-    <script src="prototype.js"></script>
-    <script src="snow.js"></script>
-    <script src="canvas.js"></script>
-    <script src="math.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+    <header>WINTER APP</header>
 </head>
 
-<body>
+<body style="background: black">
     <canvas id="myCanvas" width="640" height="480" style="border:1px solid #000000"></canvas>
-    <script>
-        var canvas = new Speroteck.Canvas('myCanvas');
-        var snowArr = [];
-        var app = {'dir': 5};
-        for (var i = 0; i < 2000; ++i) {
-            snowArr[i] = new Speroteck.Snow(canvas, app);
-        }
-        window.setInterval(function() {
-            if (random(150) == 25) {
-                app.dir = srandom(5); 
-            }
-            for (var i = 0; i < 2000; ++i) {
-                snowArr[i].move();
-            }
-            canvas.showScreen();
-        },30);
-    </script>
+    <script src="canvas.js"></script>
 </body>
 </html>
