@@ -118,4 +118,4 @@ s.Class = (function () {
         extend: extend
     };
 })();
-})(window.spero)
+})(window.spero);

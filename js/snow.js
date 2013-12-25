@@ -16,7 +16,7 @@ random = function(n) {
  * 
  */ 
 signum = function(x) {
-    return (x >= 0) ? 1 : -1;
+    return x >= 0 ? 1 : -1;
 };
 
 
@@ -24,7 +24,7 @@ signum = function(x) {
  * 
  */ 
 srandom = function(n) {
-    if (random(2) == 1) {
+    if (random(2) === 1) {
         return -random(n);
     }
 
@@ -44,17 +44,17 @@ s.Canvas = s.Class.create({
      * @constructor
      */
     initialize: function(id) {
+        var i, j;
         this.main = document.getElementById(id);
         this.screenWidth = this.main.width;
         this.screenHeight = this.main.height;
-        this.color = {};
-        this.color.r = 0;
-        this.color.g = 0;
-        this.color.b = 0;
+        this.color = {r: 0, g: 0, b: 0};
         this.ctxMain = this.main.getContext('2d');
         this.imgData = this.ctxMain.createImageData(this.screenWidth, this.screenHeight);
-        for (var i=0; i<this.screenWidth; ++i) {
-            for (var j=0; j< this.screenHeight; ++j) {
+        i = this.screenWidth;
+        while (i--) {
+            j = this.screenHeight;
+            while (j--) {
                 this.putPixel(i, j);
             }
         }
@@ -74,13 +74,14 @@ s.Canvas = s.Class.create({
      * 
      */ 
     putPixel: function(x, y) {
+        var index;
         if (x < 0 || x >= this.screenWidth) {
             return;
         }
         if (y < 0 || y >= this.screenHeight) {
             return;
         }
-        var index = (x + y*this.imgData.width)*4;
+         index = (x + y * this.imgData.width) * 4;
         this.imgData.data[index] = this.color.r;
         this.imgData.data[index+1] = this.color.g;
         this.imgData.data[index+2] = this.color.b;
@@ -136,7 +137,7 @@ s.Snowflake = s.Class.create({
      */ 
     colorLogic: function() {
         if (this.color > 0) {
-            if (random(5) == 2) {
+            if (random(5) === 2) {
                 this.color--;
             }
         } else {
@@ -149,11 +150,11 @@ s.Snowflake = s.Class.create({
      * 
      */ 
     directionLogic: function() {
-        if (this.dir > 0 && random(150) == 2) {
+        if (this.dir > 0 && random(150) === 2) {
             this.dir--;
         }
 
-        if (this.dir < 0 && random(150) == 2) {
+        if (this.dir < 0 && random(150) === 2) {
             this.dir++;
         }
         
@@ -161,7 +162,7 @@ s.Snowflake = s.Class.create({
             if (this.app.dir > 0) {
                 this.dir = this.app.dir + random(this.app.dir);
             } else {
-                this.dir = this.app.dir - random(1-this.app.dir);
+                this.dir = this.app.dir - random(1 - this.app.dir);
             }
         }
     },
@@ -180,7 +181,7 @@ s.Snowflake = s.Class.create({
 
     reset: function() {
         this.x = random(this.canvas.screenWidth);
-        this.y = -random(50);
+        this.y = -random(500);
         this.type = random(5);
         this.initType();
         this.speed = random(5);
@@ -243,11 +244,13 @@ s.Snowflake = s.Class.create({
     draw: function(color) {
         var i, j;
         this.canvas.setColor(color.r, color.g, color.b);
-        for (i=0; i<this.type; ++i) {
-            for (j=0; j<this.type; ++j) {
+        i = this.type;
+        while (i--) {
+            j = this.type;
+            while (j--) {
                 if (this.shape[i][j]) {
                     this.canvas.putPixel(this.x + i, this.y + j);
-                }
+                }  
             }
         }
     }
@@ -260,15 +263,16 @@ var canvas = new s.Canvas('myCanvas'),
     app = {'dir': 5},
     random = s.math.random,
     srandom = s.math.srandom,
-    i;
-for (i = 0; i < 2000; ++i) {
+    i = 2000;
+while(i--) {
     snowArr[i] = new s.Snowflake(canvas, app);
 }
 window.setInterval(function() {
+    var i = 2000;
     if (random(150) == 25) {
         app.dir = srandom(5); 
     }
-    for (i = 0; i < 2000; ++i) {
+    while(i--) {
         snowArr[i].move();
     }
     canvas.showScreen();
