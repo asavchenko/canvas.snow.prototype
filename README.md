@@ -1,4 +1,4 @@
-canvas.snow.prototype
+canvas.snow
 =====================
 
-Snow based on prototype.js + canvas (HTML5)
+Snow based on canvas (HTML5)
